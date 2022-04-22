@@ -2,7 +2,7 @@ package java8.api;
 
 import java.util.IntSummaryStatistics;
 import java.util.stream.IntStream;
-
+// Stream Demo 1 class shows basic of stream api 
 public class Demo1 {
 
 	public static void main(String[] args) {

@@ -1,0 +1,97 @@
+package lambda.expressions;
+
+import java.util.ArrayList;
+
+public class LambdaOnCustomClass {
+
+	public static void main(String[] args) {
+		
+		ArrayList<Employee> list = new ArrayList<>() ;
+		list.add(new Employee("Chanchal",101, new Organization("XYZ","IT",5))) ;
+		list.add(new Employee("Ram",102, new Organization("ABC","IT",4))) ;
+		list.add(new Employee("Shyam",103, new Organization("PQR","IT",3))) ;
+		list.add(new Employee("Shiva",104, new Organization("LMN","IT",5))) ;
+		list.add(new Employee("Prerna",105, new Organization("XYZ","IT",2))) ;
+		
+		//System.out.println(list);
+		
+		// now sorting list objects on the basis of employee name 
+		list.sort((e1, e2) -> e1.name.compareTo(e2.name));
+		//System.out.println(list);
+		
+		// Now sort according to employee id in descending order
+		list.sort((e1,e2) -> (e1.id < e2.id)?1:(e1.id > e2.id)?-1:0);
+		//System.out.println(list);
+		
+		// Now sort according to CMM level of comany of each employee
+		list.sort((e1,e2) -> (e1.org.getCmmlevel() < e2.org.getCmmlevel())?-1:(e1.org.getCmmlevel() > e2.org.getCmmlevel())?1:0);
+		System.out.println(list);
+
+	}
+
+}
+
+class Employee {
+	
+	String name ;
+	int id ;
+	Organization org ;
+	
+	public Employee(String name, int id, Organization org) {
+		super();
+		this.name = name;
+		this.id = id;
+		this.org = org;
+	}
+	
+	@Override
+	public String toString() {
+		return "name : " + name +","+ "id : " + id+ ", org name :" + org.getName() + ", org type : "+ org.getIndustry() + ", org cmmlevel : " + org.getCmmlevel() ;   
+	}
+	
+}
+
+class Organization{
+	
+	private String name ;
+	private String industry ;
+	private int cmmlevel ;
+	
+	public Organization() {
+		super() ;
+	}
+	
+	public Organization(String name, String industry, int cmmlevel) {
+		super();
+		this.name = name;
+		this.industry = industry;
+		this.cmmlevel = cmmlevel;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getIndustry() {
+		return industry;
+	}
+
+	public void setIndustry(String industry) {
+		this.industry = industry;
+	}
+
+	public int getCmmlevel() {
+		return cmmlevel;
+	}
+
+	public void setCmmlevel(int cmmlevel) {
+		this.cmmlevel = cmmlevel;
+	}
+	
+	
+	
+}

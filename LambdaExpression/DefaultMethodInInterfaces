@@ -1,0 +1,77 @@
+package lambda.expressions;
+
+public class DefaultMethodDemo1 {
+
+	public static void main(String[] args) {
+		
+		Test t = new Test(){
+			public void m4() {
+				System.out.println("Extending class Test in anonymous class ");
+			}
+		};
+		
+		Test t2 = new Test();
+		t2.m4();  // this will call child class m4() if we have overridden the m4() in class Test otherwise m4() of interface would have been called
+		
+	}
+}
+
+interface I{
+	void m1() ;
+	void m2() ;
+	// void m3() ;  if we add another abstract method then all classes implementing this interface has to 
+	// add this method in their class as well
+	// Therefore default() provides a mechanism to add new features without affecting exixting classes
+	
+	default void  m4() {
+		System.out.println("Default method of interface");
+	}
+	
+	// NOTE : default method of interface cannot extend the Object class method because those methods are already available to the child classes of that interface
+//	default int hashCode() {
+//		return 10 ;
+//	}
+	
+	
+}
+
+class Test implements I{
+
+	@Override
+	public void m1() {
+		System.out.println("child m1 of class test");
+		
+	}
+
+	@Override
+	public void m2() {
+		System.out.println("cchild m2 of class test");
+		
+	}
+	@Override
+	public void m4() {
+		System.out.println("Default method implementation in class Test");
+	}
+	
+}
+
+class Test2 implements I{
+
+	@Override
+	public void m1() {
+		System.out.println("child m1 of class test2");
+		
+	}
+
+	@Override
+	public void m2() {
+		System.out.println("child m2 of class test2");
+		
+	}
+	
+	@Override
+	public void m4() {
+		System.out.println("Default method implementation in class Test2");
+	}
+	
+}

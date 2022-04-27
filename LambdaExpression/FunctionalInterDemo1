@@ -1,0 +1,76 @@
+package lambda.expressions;
+
+/**
+ *  Only Functional intefaces or their implementation classes can call/invoke lambda expressions 
+ *  All @FunctionalInterface can have only one abstract method defined in them 
+ *  NOTE : To hold reference for Lambda expression we us Functional interfaces.
+*/
+@FunctionalInterface
+interface Inte{
+	
+	// abstract method of interface
+	public void hello() ;   
+	// We cannot have two or more abstract method in a Functional Interface
+	// Neither we can overload an abstract method in functional interface as well
+	
+	// default method of interface
+	default void m2() {
+		System.out.println("Inside m2  default method of interface");
+	}
+	// overloading default method of interface
+	default void m2(int x) {
+		System.out.println("What is your age ?, My age is : " + x);
+	}
+	
+	//static method of interface
+	static void m3() {
+		System.out.println("Inside m3 static method of iterface");
+	}
+	// Overloading static method of Interface
+	static void m3(String str) {
+		System.out.println("Hello, " + str);
+	}
+	
+	
+}
+
+interface Interf{
+	public void add(int a, int b);
+}
+
+interface Interf2{
+	public int square(int x);
+}
+
+
+public class FuncInterfaceDemo1 {
+
+	public static void main(String[] args) {
+		
+		// // Providing implementation for the method present with no arguments in "Inte" inteface
+		// calling abstract method of interface using interface reference
+		Inte it = ()-> System.out.println("Hello Lambda Expressions");
+		it.hello();
+		
+		// calling default method of interface using interface reference
+		it.m2();
+		it.m2(26);
+		
+		// calling static method of interface using interface name 
+		Inte.m3();
+		Inte.m3("Chanchal");
+		
+		// Providing implementation for the method present with arguments in "Interf" inteface
+		Interf i = (a,b)-> System.out.println("Sum is : " + (a+b));
+		i.add(10,20);
+		i.add(100, 40);
+		
+		// If we use { } after -> function then we must use return statement inside { } otherwise we will get CE error
+		//Interf2 i2 = n -> n*n  ;
+		Interf2 i2 = n -> { return n*n ; };   // NOTE : We have to close lambda expression with semi-colon in case we are using { }
+		System.out.println("Square of 12 is : " + i2.square(12)); 
+		
+		
+	}
+
+}

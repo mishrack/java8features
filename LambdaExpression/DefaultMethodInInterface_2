@@ -1,0 +1,32 @@
+package lambda.expressions;
+
+// Demo of using Multiple inheritance with a class implementing 2 or more interfaces 
+
+public class DefaultMethodDemo_2  implements I2, I3{
+
+	public static void main(String[] args) {
+		
+		DefaultMethodDemo_2 demo = new DefaultMethodDemo_2();
+		demo.m1();
+	}
+
+	@Override
+	public void m1() {
+		System.out.println("In class m1 method");
+		I2.super.m1();  // to call I2 m1() 
+		I3.super.m1();  // to call I3 m1() 
+	}
+}
+
+
+interface I2{
+	default void  m1(){
+		System.out.println("interface I2-> m1 method");
+	}
+}
+
+interface I3{
+	default void  m1(){
+		System.out.println("interface I3-> m1 method");
+	}
+}

@@ -1,0 +1,36 @@
+package lambda.expressions;
+
+public class AnonymousVsLambda {
+
+	
+	public static void main(String[] args) {
+		
+		// Anonymous class can implements an interface which have more than one abstract methods in it
+		// where as Lambda expressions can only implement interfaces which have single abstract method(SAM)
+		
+		Interf1 it = new Interf1(){
+			
+			public void m1() {
+				System.out.println("Method m1");
+			}
+			public void m2() {
+				System.out.println("Method m2");
+			}
+			
+		} ;
+		
+		
+		Interf4 it2 = () -> System.out.println("Inside method m3 of Interf4 inteface");
+	}
+}
+
+
+interface Interf1{
+	public void m1() ;
+	public void m2() ;
+}
+
+@FunctionalInterface
+interface Interf4 {
+	public void m3() ;
+}

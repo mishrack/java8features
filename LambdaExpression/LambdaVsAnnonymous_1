@@ -1,0 +1,40 @@
+package lambda.expressions;
+
+// Demo of using annonymous class and lambda expression 
+// Annonymous classes are more powerful than Lambda expressions
+
+public class LambdaOnRunnable {
+
+	public static void main(String[] args) {
+		
+		// Implementing Runnable iinterface using an annonymous class
+		// We are not creating an instance of Runnable interface instead we provided implementation for annonymous class
+		Runnable r1 = new Runnable() {
+			
+			public void run() {
+				System.out.println("In thread : " + Thread.currentThread().getName());
+			}
+		} ;
+		
+		Thread t1 = new Thread(r1) ;
+		t1.start();  
+		
+		
+		// Now the same can be implemented using lambda expression as well
+		Runnable r2 = () -> {
+			
+			System.out.println("In thread : " + Thread.currentThread().getName());
+		} ;
+		Thread t2 = new Thread(r2) ;
+		t2.start();
+		
+		
+		for(int i = 0; i< 3 ; i++) {
+			System.out.println("In thread : " + Thread.currentThread().getName());
+			
+		}
+		
+
+	}
+
+}

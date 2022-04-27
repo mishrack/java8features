@@ -1,0 +1,30 @@
+package lambda.expressions;
+
+// Demo of using static methods present inside interfaces
+
+public class StaticMethods {
+
+	public static void main(String[] args) {
+		
+		// Correct way of calling static method in implementation class
+		// NOTE : static methods can be called only by interface name only
+		// NOTE : interface static methods can be called without implementing that interface in a class
+		// NOTE : From java 1.8 onwards , we can take main() inside interface as well 
+		
+		It1.m1();       // valid
+		// m1() ;       // invalid
+		//StaticMethods.m1() ;  // invalid
+		StaticMethods st = new StaticMethods() ;
+		//st.m1() ;   // invalid
+		
+
+	}
+
+}
+
+interface It1 {
+	public static void  m1() {
+		System.out.println("In method m1 of interface");
+	}
+	
+}

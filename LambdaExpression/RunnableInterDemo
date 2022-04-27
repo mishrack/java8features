@@ -1,0 +1,28 @@
+package lambda.expressions;
+
+/**
+ * Runnable interface is also a functional interface as it has only one method run() 
+ * So while implementing a thread we must use Lambda expression to provide implementation for run() 
+ * Instead of going with normal class appraoch
+ */
+
+public class FuncInterfaceDemo2 {
+
+	public static void main(String[] args) {
+	
+		Runnable r = () -> {
+			
+			for(int i = 0 ; i < 10 ; i++) {
+				System.out.println("inside child thread loop");
+			}
+		} ;
+		
+		r.run() ;
+		
+		for(int i = 0 ; i < 10 ; i++) {
+			System.out.println("inside main thread loop");
+		}
+		
+	}
+
+}

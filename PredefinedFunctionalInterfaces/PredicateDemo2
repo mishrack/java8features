@@ -1,0 +1,141 @@
+package predefined.funcInterfaces;
+
+import java.util.List;
+import java.util.Arrays;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+public class Predicate_Interface_Demo {
+
+	public static void main(String[] args) {
+		
+		Predicate<Integer> p = i -> i%2 == 0 ;
+		
+		System.out.println(p.test(10));  // true
+		System.out.println(p.test(15));  // false
+		
+		
+		 Employee emp1 = new Employee("Ram", 101,15000,true);
+		 Employee emp2 = new Employee("Shyam", 102,20000,false);
+		 Employee emp3 = new Employee("Sitara", 103,25000,true);
+		 Employee emp4 = new Employee("Abhinav", 104,19000,false);
+		 Employee emp5 = new Employee("Suresh", 105,24000,true) ;
+		 
+		 // Employee whose salary is > 100000 and are single
+		 Predicate<Employee> p1 = e -> e.getSalary() > 10000 && e.isSingle()==true ;
+		 System.out.println(p1.test(emp2));
+		 System.out.println(p1.test(emp3));
+		 
+		 //Employee whose name starts with 'S' and their salary is > 100000 and are not single
+		 Predicate<Employee> p2 = e -> e.getName().charAt(0) == 'S' && e.getSalary()> 10000 && e.isSingle() == false ;
+		 System.out.println(p2.test(emp3));
+		 System.out.println(p2.test(emp1));
+		 
+		 // Employees whose name length is >= 5 and contains length is even
+		 Predicate<Employee> p3 = e -> e.getName().length() >= 5 && e.getName().length() % 2 == 0 ;
+		 Employee emp[] = {emp1, emp2, emp3, emp4, emp5};
+		 for(Employee e : emp) {
+			 if(p3.test(e)) {
+				 System.out.println(e);
+			 }
+		 }
+		 
+		 // Remove employees having salary greater than 20000 , keep those having salary <= 20000
+		 Predicate<Employee> p4 = e -> e.getSalary() <= 20000 ;
+		 List<Employee> list = Arrays.asList(emp) ;
+		 
+		 // filter the employees whose salary is > 20000 
+		 List<Employee> elist =   list.stream().filter(p4).collect(Collectors.toList()) ;
+		 
+		 System.out.println(elist);
+		 
+	}
+
+}
+
+class Employee{
+	
+	private String name  ;
+	private int empId ;
+	private int salary ;
+	boolean isSingle ;
+	
+	public Employee() {
+		
+	}
+	
+	public Employee(String name, int empId, int salary, boolean isSingle) {
+		super();
+		this.name = name;
+		this.empId = empId;
+		this.salary = salary;
+		this.isSingle = isSingle;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getEmpId() {
+		return empId;
+	}
+	public void setEmpId(int empId) {
+		this.empId = empId;
+	}
+	public int getSalary() {
+		return salary;
+	}
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
+	public boolean isSingle() {
+		return isSingle;
+	}
+	public void setSingle(boolean isSingle) {
+		this.isSingle = isSingle;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + empId;
+		result = prime * result + (isSingle ? 1231 : 1237);
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + salary;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Employee other = (Employee) obj;
+		if (empId != other.empId)
+			return false;
+		if (isSingle != other.isSingle)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (salary != other.salary)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [name=" + name + ", empId=" + empId + ", salary=" + salary + ", isSingle=" + isSingle + "]";
+	}
+	
+	
+	
+}

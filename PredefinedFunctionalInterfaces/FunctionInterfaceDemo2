@@ -1,0 +1,84 @@
+package predefined.funcInterfaces;
+
+import java.util.function.Function;
+
+public class Function_Interface_Demo_2 {
+
+	public static void main(String[] args) {
+		
+		Function<Student, String> f = s ->{
+			
+			int marks = s.getMarks() ;
+			String grade = "" ;
+			if(marks >= 80) grade = "A: Distinction" ;
+			else if(marks >=60) grade ="B: FIrst Class" ;
+			else if(marks >=50) grade ="C: Second Class" ;
+			else if(marks >=35) grade ="D: Third Class" ;
+			else grade = "E: Failed";
+			return grade ;
+			
+		} ;
+		
+		Student s [] = { new Student("Shyam", 101, 90),
+						 new Student("Suresh" , 102, 75),
+						 new Student("Payal", 103 ,59) ,
+						 new Student("Ritu", 104, 47),
+						 new Student("Kamlesh", 105, 30) 
+		};
+		
+		for(Student st : s) {
+			System.out.print("Student name is: " + st.getName()+ ":") ;
+			System.out.print("Student roll is: "+ st.getRoll()+ ":");
+			System.out.print("Student grade is: "+ f.apply(st)+ ":");
+			System.out.println();
+		}
+
+	}
+
+}
+
+class Student{
+	
+	private String name ;
+	private  int roll ;
+	private int marks ;
+	
+	public Student(String name, int roll, int marks) {
+		super();
+		this.name = name;
+		this.roll = roll;
+		this.marks = marks;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getRoll() {
+		return roll;
+	}
+
+	public void setRoll(int roll) {
+		this.roll = roll;
+	}
+
+	public int getMarks() {
+		return marks;
+	}
+
+	public void setMarks(int marks) {
+		this.marks = marks;
+	}
+
+	@Override
+	public String toString() {
+		return "Student [name=" + name + ", roll=" + roll + ", marks=" + marks + "]";
+	}
+	
+	
+	
+}

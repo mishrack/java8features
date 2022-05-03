@@ -1,0 +1,17 @@
+package predefined.funcInterfaces;
+
+import java.util.function.BiPredicate;
+
+// It is similar to Predicate except it takes two arguments in test() method
+
+public class BiPredicate_Interface_Demo {
+
+	public static void main(String[] args) {
+		
+		// BiPredicate to check if the sum of two numbers is even or odd
+		BiPredicate<Integer,Integer> p = (a,b) -> (a+b) % 2 == 0 ; 
+		System.out.println("Sum is Even : " + p.test(10, 20));  // true
+		System.out.println("Sum is Even : " + p.test(15, 20));  // false
+	}
+
+}

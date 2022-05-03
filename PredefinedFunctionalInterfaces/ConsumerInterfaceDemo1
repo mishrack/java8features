@@ -1,0 +1,53 @@
+package predefined.funcInterfaces;
+
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
+public class Consumer_Interface_Demo_1 {
+
+	public static void main(String[] args) {
+
+		// Applying function on Student class for Grade calculation
+		Function<Student, String> f = s -> {
+
+			int marks = s.getMarks();
+			String grade = "";
+			if (marks >= 80)
+				grade = "A: Distinction";
+			else if (marks >= 60)
+				grade = "B: FIrst Class";
+			else if (marks >= 50)
+				grade = "C: Second Class";
+			else if (marks >= 35)
+				grade = "D: Third Class";
+			else
+				grade = "E: Failed";
+			return grade;
+
+		};
+
+		// Predicate condition to evalute Student got marks > 60
+		Predicate<Student> p = s1 -> s1.getMarks() > 60;
+
+		// Consumer interface to print the Student informatio
+		Consumer<Student> c = s -> {
+			System.out.print("Student name is: " + s.getName() + ":");
+			System.out.print("Student roll is: " + s.getRoll() + ":");
+			System.out.print("Student grade is: " + f.apply(s) + ":");
+			System.out.println();
+		};
+
+		Student s[] = { new Student("Shyam", 101, 90), new Student("Suresh", 102, 75), new Student("Payal", 103, 59),
+				new Student("Ritu", 104, 47), new Student("Kamlesh", 105, 30) };
+
+		for(Student st : s) {
+			// Print those Student details via Consumer method who have marks > 60 
+			if(p.test(st)) {
+				c.accept(st);
+			}
+		}
+		
+	}
+
+}

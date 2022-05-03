@@ -17,7 +17,12 @@ public class Function_Interface_Demo_1 {
 		Function<String , String> f3 = s -> s.toUpperCase();
 		System.out.println(f3.apply("chanchal mishra"));  // CHANCHAL MISHRA
 		
-		
+		// Function Chaining : we can as may number of functions we want
+		Function<Integer , Integer> f4 = i -> 2 * i ;
+		// andThen() method
+		System.out.println(f.andThen(f4).apply(4));  // 32
+		// compose() method
+		System.out.println(f.compose(f4).apply(4));  // 64
 		
 	}
 

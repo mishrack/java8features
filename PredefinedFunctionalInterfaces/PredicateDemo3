@@ -1,0 +1,42 @@
+package predefined.funcInterfaces;
+
+import java.util.function.Predicate;
+
+// We can use multiple predicates as a single predicate, this is known as Predicate joining
+// p1 -> to check one condition, p2 -> to check another condition
+// Now to use we have write the combined condition like this
+/*  1. p1.and(p2).test(T)   --> both condition must satisfy
+ *  2. p1.or(p2).test(T)    --> either of them may be true
+ *  3. p1.negate().test(T)  --> reverse of p1 condition
+ */ 
+
+public class Predicate_Interface_Demo_2 {
+
+	public static void main(String[] args) {
+		
+		int x[] = {0,5,10,15,19,22,30,34,40,46} ;
+		
+		Predicate<Integer> p1 = i -> i%2 == 0 ;
+		Predicate<Integer> p2 = i -> i > 10 && i%5 == 0; 
+
+		// Numbers which are even and > 10 and divided by 5 as well
+		for(int i : x) {
+			if(p1.and(p2).test(i))
+				System.out.print(" "+ i );
+		}
+		System.out.println();
+		// Numbers which are even or > 10 and divided by 5 as well
+		for(int i : x) {
+			if(p1.or(p2).test(i))
+				System.out.print(" "+ i );
+		}
+		System.out.println();
+		// Numbers which are odd
+		for(int i : x) {
+			if(p1.negate().test(i))
+				System.out.print(" "+ i );
+		}
+		
+	}
+
+}

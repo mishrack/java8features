@@ -1,0 +1,29 @@
+package predefined.funcInterfaces;
+
+//Demo of Supplier interface and its get() method
+
+import java.util.Date;
+import java.util.function.Supplier;
+
+public class Supplier_Interface_Demo_1 {
+
+	public static void main(String[] args) {
+		
+		// Supplier for Date object
+		Supplier<Date> s = () -> new Date();
+		System.out.println(s.get());  // Wed May 04 01:29:15 IST 2022
+		
+		//Supplier for OTP generation
+		Supplier<String> s2 = () ->{
+			String otp = "" ;
+			for(int i =0 ; i < 6 ; i++) {
+				otp = otp+(int)(Math.random()*10) ;
+			}
+			return otp ;
+		};
+		System.out.println(s2.get());  // 114849
+		System.out.println(s2.get());  // 495723
+		
+	}
+
+}

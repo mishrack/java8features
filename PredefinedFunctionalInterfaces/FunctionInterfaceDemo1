@@ -1,0 +1,24 @@
+package predefined.funcInterfaces;
+
+// we should for Function interface when we want to perform any operation and expect any return value in result
+
+import java.util.function.Function;
+public class Function_Interface_Demo_1 {
+
+	public static void main(String[] args) {
+		
+		Function<Integer , Integer> f = i -> i * i ;
+		System.out.println(f.apply(4));  // 16 
+		System.out.println(f.apply(16));  // 256
+		
+		Function<String , Integer> f2 = s -> s.length() ;
+		System.out.println(f2.apply("Chanchal Mishra"));  // 15
+		
+		Function<String , String> f3 = s -> s.toUpperCase();
+		System.out.println(f3.apply("chanchal mishra"));  // CHANCHAL MISHRA
+		
+		
+		
+	}
+
+}

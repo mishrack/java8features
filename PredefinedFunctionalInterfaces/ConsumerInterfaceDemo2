@@ -1,0 +1,67 @@
+package predefined.funcInterfaces;
+
+import java.util.function.Consumer;
+
+// Demo of Consumer chaining "andThen()" method
+
+public class Consumer_Interface_Demo_2 {
+
+	public static void main(String[] args) {
+		
+		Movie movie1 = new Movie("KGF 2",new String[]{"Hindi","Telgu", "Tamil", "Kannada","English"}, "Blockbuster" ) ;
+		
+		Consumer<Movie> c1 = m -> System.out.println("Movie name is : "+ m.getName() +" :  Box office response : " + m.getQuality());
+		Consumer<Movie> c2 = m -> {
+			System.out.print("Released in languages: ");
+			for(String s :m.getLanguages()) {
+				System.out.print(" " + s);
+			}
+		};
+
+		Consumer<Movie> cc = c1.andThen(c2) ;
+		cc.accept(movie1);
+	}
+
+}
+
+class Movie {
+	
+	private String name ;
+	private String[] languages ;
+	private String quality ;
+	public String getName() {
+		return name;
+	}
+	
+	public Movie(String name, String[] languages, String quality) {
+		super();
+		this.name = name;
+		this.languages = languages;
+		this.quality = quality;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String[] getLanguages() {
+		return languages;
+	}
+	public void setLanguages(String[] languages) {
+		this.languages = languages;
+	}
+	public String getQuality() {
+		return quality;
+	}
+	public void setQuality(String quality) {
+		this.quality = quality;
+	}
+
+	@Override
+	public String toString() {
+		return "Movie [name=" + name + ", languages=" + languages + ", quality=" + quality + "]";
+	}
+	
+	
+	
+	
+}

@@ -1,0 +1,44 @@
+package java8.streams;
+
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+
+// Iterator Deifnitions present in Java 1.8 
+
+@SuppressWarnings("unused")
+public class StreamDemo {
+
+	public static void main(String[] args) {
+	
+	List<Integer> list = Arrays.asList(1,2,5,7,8,9,3) ;
+	
+	// one way to iterate is to use normal for loop
+//	for(int i = 0 ; i < 7 ; i++)
+//	{
+//		System.out.print(list.get(i)+ " " );
+//	}
+
+	// second way is to for-each loop 
+//	for(int i : list)
+//	{
+//		System.out.print(i + " ");
+//	}
+	
+	// Third way to iterate is to use Iterator intrface 
+//	Iterator<Integer> it = list.iterator();
+//	
+//	while(it.hasNext())
+//	{
+//		System.out.print(it.next() + " ");
+//	}
+	
+	// There are two types of iterator in general 
+	// 1. External iterators : All above one external loops
+	// 2. Internal iterators : using lambda expressions
+	
+	list.forEach(i -> System.out.print(i + " "));
+	
+	}
+
+}

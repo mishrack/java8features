@@ -1,0 +1,54 @@
+package java8.streams;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Consumer;
+
+// How Consumer Interface works in Java 1.8 ?  
+// How can we use Lambda Expressions 
+// NOTE : Lambda Expressions will only work with Functional Interface
+
+@SuppressWarnings("unused")
+public class StreamDemo2 {
+
+	public static void main(String[] args) {
+	
+		List<Integer> list = Arrays.asList(1,2,4,5,7,8,3,0) ;   // list here acts as Producer 
+		
+		// Step 1 : Use whole Consumer class
+//		Consumer<Integer> c = new Consumer<Integer>()   // consumer interface is introduced in Java 1.8 
+//		{
+//			public void accept(Integer i) {
+//				System.out.print(i + " ");
+//			}
+//		} ;
+		
+		// Step 2: Only accept() is there as a method , wo we can use it like this  
+		//Consumer<Integer> c =  (Integer i) -> System.out.print(i + " ");   // as we have only one method in Consumer i.e accept(T t)
+			
+		// Step 3:
+		// Now when we know we have Integer as an Argument, we can remove it as well, like this
+		//Consumer<Integer> c =  i -> System.out.print(i + " ");
+				 
+		// Step 4: Since we have only one object in foreach() we can directly pass into the argument in it 
+		
+		//list.forEach(i -> System.out.print(i + " "));   // passing consumer interface
+		
+		// Step 5: Passing a Method Reference, in this case we don't need variable i as well
+		list.forEach(System.out::println);
+		
+		list.forEach(StreamDemo2::isEven);
+		
+
+	}
+	
+	public static void isEven(int i) {
+		if(i%2 == 0)
+		{
+			System.out.println(true);
+		}
+		else
+			System.out.println(false);
+	} 
+
+}

@@ -1,0 +1,47 @@
+package java8.streams;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+// Use of Stream interface and its method
+// stream() , filter() and map() , collect() , Collectors class
+
+public class StreamDemo4 {
+
+	public static void main(String[] args) {
+		
+		List<Integer> l = new ArrayList<Integer>() ;
+		l.add(10) ;
+		l.add(15) ;
+		l.add(20) ;
+		l.add(25) ;
+		l.add(12) ;
+		l.add(33) ;
+		l.add(19) ;
+		
+		System.out.println(l);  // [10, 15, 20, 25, 12, 33, 19]
+		// filter(Predicate)
+		List<Integer> l2 = l.stream().filter(i -> i%2 == 0).collect(Collectors.toList()) ;
+		System.out.println(l2);   // [10, 20, 12]
+		// map(Function)
+		List<Integer> l3 = l.stream().map(i -> i+5).collect(Collectors.toList()) ;
+		System.out.println(l3);  // [15, 20, 25, 30, 17, 38, 24]
+		// count() 
+		long lessthan20 = l.stream().filter(x -> x <20).count() ;
+		System.out.println(lessthan20);   // 4
+		//sorted() -- default natural sorting order 
+		List<Integer> l4 = l.stream().sorted().collect(Collectors.toList()) ;
+		System.out.println(l4);  // [10, 12, 15, 19, 20, 25, 33]
+		// sorted() --  customized sorting 
+		// Here instead of using -ve sign before i1 , we can also swap the places of i1 and i2 in compareTo() method
+		List<Integer> l5 = l.stream().sorted((i1,i2) -> -i1.compareTo(i2)).collect(Collectors.toList()) ;
+		System.out.println(l5);  // [33, 25, 20, 19, 15, 12, 10]
+		
+		
+	}
+
+}
+
+
+

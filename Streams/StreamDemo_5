@@ -1,0 +1,44 @@
+package java8.streams;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+// Demo of sorted method in Stream with collections concept, comparable and comparator interfaces
+/*
+ * Pb statement : sort the given string in increasing length and if lengths are same then sort then by alphabetic order 
+ */
+
+public class StreamDemo5 {
+
+	public static void main(String[] args) {
+		
+		List<String> l = new ArrayList<>() ;
+		l.add("A") ;
+		l.add("AAAA") ;
+		l.add("AA") ;
+		l.add("AAA") ;
+		l.add("AAAAA");
+		l.add("XXX") ;
+		System.out.println(l); // acc to insertion order : [A, AAAA, AA, AAA, AAAAA, XXX]
+		
+		// Implementing comparator to sort acc to length of string 
+		Comparator<String> c = (s1,s2) ->{
+			int l1 = s1.length() ;
+			int l2 = s2.length() ;
+			if(l1<l2) return -1 ;
+			else if(l1> l2) return 1;
+			else return s1.compareTo(s2) ;
+		};
+		
+		// now applying stream on list objects
+		List<String> l2 = l.stream().sorted(c).collect(Collectors.toList()) ;
+		System.out.println(l2);  // acc to customized sorting : [A, AA, AAA, XXX, AAAA, AAAAA]
+
+	}
+
+}
+
+
+

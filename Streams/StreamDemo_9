@@ -1,0 +1,86 @@
+package java8.api.streams;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Demo4 {
+
+	public static void main(String[] args) {
+		
+		List<Employee> employee = getAllEmployees() ;
+		
+		//New list
+		List<Employee> copy = new ArrayList<>(employee);  // avoid mutation
+		
+		//sort descending 
+		copy.sort((o1, o2) -> o2.getSalary() - o1.getSalary());
+		
+		//get first 3 elements
+		for(int i = 0; i < 3 ; i++) {
+			Employee employee2 = copy.get(i) ;
+			System.out.println(employee2.getName());
+			
+		}
+		
+		
+		// Using Stream API 
+		List<Employee> emp1 = getAllEmployees() ;
+		emp1.stream().sorted(Comparator.comparingInt(Employee::getSalary).reversed())
+		.limit(3).map(Employee::getName).forEach(System.out::println);
+		
+		// get all 3 employee active and highest paid as well
+		List<String> names = emp1.stream().sorted(Comparator.comparingInt(Employee::getSalary).reversed())
+		.filter(empx -> empx.isActive())
+		.limit(3).map(Employee::getName).collect(Collectors.toList());
+
+	}
+
+	private static List<Employee> getAllEmployees() {
+		// code here 
+		return null;
+	}
+
+}
+
+class Employee{
+	
+	private String name ;
+	private int id ;
+	private int salary ;
+	private String department ;
+	boolean isActive ;
+	
+	public boolean isActive() {
+		return isActive;
+	}
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public int getSalary() {
+		return salary;
+	}
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
+	public String getDepartment() {
+		return department;
+	}
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+	
+}

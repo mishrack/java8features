@@ -1,0 +1,63 @@
+package interview.problems.java8streams;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.BinaryOperator;
+import java.util.stream.Collectors;
+
+// DEMO OF STREAMS ON CUSTOM EMPLOYEE CLASS
+
+public class EmployeeDemo {
+
+	public static void main(String[] args) {
+		
+		List<Employee> l = Arrays.asList(
+				new Employee("ram",101,10,true,25000),
+				new Employee("shyam",102,11,false,30000),
+				new Employee("gita",103,10,true,25000),
+				new Employee("rohit",104,12,true,35000),
+				new Employee("virat",105,11,false,29000),
+				new Employee("dk",106,13,false,30000),
+				new Employee("ck",107,14,true,25000)
+				);
+
+		// Q1: Employee details working in each department
+		 Map<Integer, List<Employee>> listBasedOnDept = l.stream().collect(Collectors.groupingBy(Employee::getDeptid, Collectors.toList()));
+		 
+		 listBasedOnDept.entrySet().forEach(entry ->{
+			 System.out.println(entry.getKey() + "---->" + entry.getValue());
+		 });
+		 
+		 // Q2: Employees count working in each department
+		 Map<Integer, Long> empCount =  l.stream().collect(Collectors.groupingBy(Employee::getDeptid , Collectors.counting())) ;
+		 
+		 empCount.entrySet().forEach(entry ->{
+			 System.out.println("deptId : " + entry.getKey() + " employees:  "+ entry.getValue());
+		 });
+		 
+		 // Q3: Print active and inActiev employees in the given collection
+		 long  activeEmp= l.stream().filter(e -> e.isActive() == true).count() ;
+		 long  inactiveEmp= l.stream().filter(e -> e.isActive() == false).count() ;
+		 
+		 System.out.println("ActiveEmp : "+ activeEmp +" , "+ "InActiveEmp : "+ inactiveEmp );
+		 
+		 // Q4: Print Min/Max salary from given Collection
+		 Optional<Employee> maxSal = l.stream().max(Comparator.comparing(Employee::getSalary)) ;
+		 Optional<Employee> minSal = l.stream().min(Comparator.comparing(Employee::getSalary)) ;
+		 System.out.println("Max Salary Emp : "+ maxSal);
+		 System.out.println("Min Salary Emp : "+ minSal);
+		 
+		 // Q5: Print the Max Salary of an employee for each department 
+		 Map<Integer, Optional<Employee>> maxSalEmpDeptWise = l.stream().collect(Collectors.groupingBy(Employee::getDeptid,
+				 Collectors.reducing(BinaryOperator.maxBy(Comparator.comparing(Employee::getSalary)))));
+
+		 maxSalEmpDeptWise.entrySet().forEach(entry ->{
+			 System.out.println("Dept: "+ entry.getKey()+ "-->" + entry.getValue());
+		 });
+		 
+	}
+
+}
